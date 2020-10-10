@@ -1,4 +1,4 @@
-package storing
+package pet
 
 import (
 	"fmt"
