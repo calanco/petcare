@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// Type used by Pet struct
 type Breed string
 
 const (
@@ -12,6 +13,7 @@ const (
 	CHIHUAHUA       = "chihuahua"
 )
 
+// Provide a json unmarshal function to force breed to assume fixed values
 func (b *Breed) UnmarshalJSON(data []byte) error {
 	str := strings.ToUpper(strings.Trim(string(data), `"`))
 	switch {
