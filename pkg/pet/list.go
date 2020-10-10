@@ -3,6 +3,7 @@ package pet
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -16,4 +17,5 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintln(w, string(json))
+	log.Println("Listed:", string(json))
 }
