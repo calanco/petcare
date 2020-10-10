@@ -9,8 +9,8 @@ import (
 	"net/http"
 )
 
-// Function to serve HTTP requets at /api/pet/store endpoint
-func StoreHandler(w http.ResponseWriter, r *http.Request) {
+// Function to serve HTTP requets at /api/pet/create endpoint
+func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	p := Pet{}
 	if err := p.parseJSON(w, r); err != nil {
 		fmt.Fprintf(w, "Err: %v", err)
@@ -40,7 +40,7 @@ func (p *Pet) parseJSON(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
-// Store Pet in PetMap
-func (p Pet) storePet(w http.ResponseWriter) {
+// Create Pet in PetMap
+func (p Pet) createPet(w http.ResponseWriter) {
 	PetMap[p.Name] = p
 }
