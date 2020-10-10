@@ -5,15 +5,15 @@ import (
 	"net/http"
 
 	"github.com/calanco/petcare/pkg/home"
-	"github.com/calanco/petcare/pkg/pet"
+	"github.com/calanco/petcare/pkg/storing"
 )
 
 func main() {
 	homeHandler := &home.Home{}
-	petHandler := &pet.Pet{}
+	storeHandler := &storing.Pet{}
 
 	mux := http.NewServeMux()
 	mux.Handle("/", homeHandler)
-	mux.Handle("/pet", petHandler)
+	mux.Handle("/store", storeHandler)
 	log.Fatal(http.ListenAndServe(":80", mux))
 }
