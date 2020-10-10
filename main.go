@@ -6,14 +6,12 @@ import (
 
 	"github.com/calanco/petcare/pkg/home"
 	"github.com/calanco/petcare/pkg/storing"
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	homeHandler := &home.Home{}
-	storeHandler := &storing.Pet{}
-
-	mux := http.NewServeMux()
-	mux.Handle("/", homeHandler)
-	mux.Handle("/store", storeHandler)
+	mux := mux.NewRouter()
+	mux.HandleFunc("/", home.HomeHandler).Methods("GET")
+	mux.HandleFunc("/api/store", storing.StoreHandler).Methods("POST")
 	log.Fatal(http.ListenAndServe(":80", mux))
 }
