@@ -3,10 +3,10 @@ package pet
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
-	"log"
 	"os"
 )
+
+const DATAPATH = "data.txt"
 
 // Func to create data.txt files if it doesn't exists
 func createFileIfNotExists(path string) error {
@@ -39,19 +39,22 @@ func writeOnFile(p Pet, path string) error {
 }
 
 // Func to read from data.txt file, line by line
-func readFromFile(path string) {
+func readFromFile(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 	defer file.Close()
 
+	content := []string{}
 	scanner := bufio.NewScanner(file)
+
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
+		content = append(content, scanner.Text())
 	}
 
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
+	return content, nil
 }
