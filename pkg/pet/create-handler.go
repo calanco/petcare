@@ -34,8 +34,3 @@ func (p *Pet) parseJSON(w http.ResponseWriter, r *http.Request) error {
 	}
 	return nil
 }
-
-// Create Pet in PetMap
-func (p Pet) createPet(w http.ResponseWriter) {
-	PetMap[p.Name] = p
-}
