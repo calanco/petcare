@@ -1,5 +1,7 @@
 package pet
 
+import "fmt"
+
 // Pet defines pet attributes
 type Pet struct {
 	Name    string  `json:"name"`
@@ -12,3 +14,13 @@ type Pet struct {
 }
 
 var PetMap = make(map[string]Pet)
+
+// Check if there is a pet with name equals to nama
+func GetPet(name string) (Pet, error) {
+	for k, v := range PetMap {
+		if k == name {
+			return v, nil
+		}
+	}
+	return Pet{}, fmt.Errorf("%s is not one of your pets", name)
+}
