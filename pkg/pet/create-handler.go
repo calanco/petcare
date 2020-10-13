@@ -17,12 +17,7 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	if p.Name != "" {
-		PetMap[p.Name] = p
-		return
-	}
-	fmt.Fprintf(w, "No name for: %v", p)
-	log.Println("No name for:", p)
+	PetMap[p.Name] = p
 }
 
 // Marshal JSON data in Pet struct
