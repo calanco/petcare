@@ -28,7 +28,7 @@ func (s *Size) UnmarshalJSON(data []byte) error {
 	case str == "EXTRALARGE":
 		*s = EXTRALARGE
 	default:
-		return fmt.Errorf("Taglia sconosciuta: %s", str)
+		return fmt.Errorf("%s not allowed as size", str)
 	}
 	return nil
 }

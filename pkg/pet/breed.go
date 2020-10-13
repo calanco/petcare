@@ -22,7 +22,7 @@ func (b *Breed) UnmarshalJSON(data []byte) error {
 	case str == "CHIHUAHUA":
 		*b = CHIHUAHUA
 	default:
-		return fmt.Errorf("Razza sconosciuta: %s", str)
+		return fmt.Errorf("%s not allowed as breed", str)
 	}
 	return nil
 }

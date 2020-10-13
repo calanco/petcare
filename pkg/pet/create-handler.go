@@ -30,7 +30,10 @@ func (p *Pet) parseJSON(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 	if p.Name == "" {
-		return errors.New("Nessun nome fornito")
+		return errors.New("No name defined")
+	}
+	if p.Species == "" {
+		return errors.New("No species defined")
 	}
 	return nil
 }
