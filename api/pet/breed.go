@@ -5,15 +5,16 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Breed is a type used by Pet struct
 type Breed string
 
+// Possible values of Breed type
 const (
 	BASSOTTO  Breed = "bassotto"
 	CHIHUAHUA       = "chihuahua"
 )
 
-// Provide a json unmarshal function to force breed to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force breed to assume fixed values
 func (b *Breed) UnmarshalJSON(data []byte) error {
 	str := strings.ToUpper(strings.Trim(string(data), `"`))
 	switch {

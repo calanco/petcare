@@ -3,9 +3,10 @@ package food
 import (
 	"fmt"
 
-	"github.com/calanco/petcare/pkg/pet"
+	"github.com/calanco/petcare/api/pet"
 )
 
+// Food is a string defining the food for a determined pet
 type Food string
 
 // Get food for p pet

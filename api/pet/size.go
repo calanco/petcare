@@ -5,9 +5,10 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Size is a type used by Pet struct
 type Size string
 
+// Possible values of Size type
 const (
 	SMALL      Size = "small"
 	MEDIUM          = "medium"
@@ -15,7 +16,7 @@ const (
 	EXTRALARGE      = "extralarge"
 )
 
-// Provide a json unmarshal function to force size to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force size to assume fixed values
 func (s *Size) UnmarshalJSON(data []byte) error {
 	str := strings.ToUpper(strings.Trim(string(data), `"`))
 	switch {

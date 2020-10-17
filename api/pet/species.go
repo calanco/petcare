@@ -5,15 +5,16 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Species is a type used by Pet struct
 type Species string
 
+// Possible values of Species type
 const (
 	DOG Species = "dog"
 	CAT         = "cat"
 )
 
-// Provide a json unmarshal function to force species to assume fixed values
+// UnmarshalJSON povides a json unmarshal function to force species to assume fixed values
 func (s *Species) UnmarshalJSON(data []byte) error {
 	str := strings.ToUpper(strings.Trim(string(data), `"`))
 	switch {

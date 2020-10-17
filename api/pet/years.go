@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Years is a type used by Pet struct
 type Years int
 
-// Provide a json unmarshal function to force years to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force years to assume fixed values
 func (y *Years) UnmarshalJSON(data []byte) error {
 	str := strings.Trim(string(data), `"`)
 

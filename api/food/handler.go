@@ -7,14 +7,15 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	pet "github.com/calanco/petcare/pkg/pet"
+	pet "github.com/calanco/petcare/api/pet"
 )
 
+// petName defines the name of the pet
 type petName struct {
-	Name string `json:name`
+	Name string `json:"name"`
 }
 
-// Function to serve HTTP requets at /api/food/get endpoint
+// GetHandler serves HTTP requests at /api/food/get endpoint
 func GetHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/raw")
 
@@ -34,7 +35,7 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, food)
 }
 
-// Get pet name from request
+// getPetName gets pet name from request
 func getPetName(r *http.Request) (string, error) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {

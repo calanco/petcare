@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Months is a type used by Pet struct
 type Months int
 
-// Provide a json unmarshal function to force months to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force months to assume fixed values
 func (m *Months) UnmarshalJSON(data []byte) error {
 	str := strings.Trim(string(data), `"`)
 

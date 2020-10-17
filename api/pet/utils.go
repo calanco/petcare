@@ -6,9 +6,10 @@ import (
 	"os"
 )
 
+// DATAPATH stores the text file path where to store pets possibly
 const DATAPATH = "data.txt"
 
-// Func to create data.txt files if it doesn't exists
+// createFileIfNotExists creates data.txt files if it doesn't exists
 func createFileIfNotExists(path string) error {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		f, err := os.Create(path)
@@ -20,7 +21,7 @@ func createFileIfNotExists(path string) error {
 	return nil
 }
 
-// Func to write Pet on data.txt file
+// writeOnFile writes Pet on data.txt file
 func writeOnFile(p Pet, path string) error {
 	f, err := os.OpenFile(path, os.O_APPEND, 0644)
 	defer f.Close()
@@ -38,7 +39,7 @@ func writeOnFile(p Pet, path string) error {
 	return nil
 }
 
-// Func to read from data.txt file, line by line
+// readFromFile reads from data.txt file, line by line
 func readFromFile(path string) ([]string, error) {
 	file, err := os.Open(path)
 	if err != nil {

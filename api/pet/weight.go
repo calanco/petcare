@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-// Type used by Pet struct
+// Weight is a type used by Pet struct
 type Weight float32
 
-// Provide a json unmarshal function to force weight to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force weight to assume fixed values
 func (w *Weight) UnmarshalJSON(data []byte) error {
 	str := strings.Trim(string(data), `"`)
 	f, err := strconv.ParseFloat(str, 32)
