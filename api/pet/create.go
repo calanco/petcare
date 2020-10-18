@@ -1,6 +1,7 @@
 package pet
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -11,7 +12,7 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 
 	p := Pet{}
 	if err := p.ParseJSON(w, r); err != nil {
-		http.Error(w, error.Error(err), 500)
+		http.Error(w, fmt.Sprint(err), 500)
 		log.Println(err)
 		return
 	}

@@ -26,8 +26,8 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 
 	j, err := json.Marshal(p)
 	if err != nil {
-		http.Error(w, error.Error(err), 500)
-		log.Printf(error.Error(err))
+		http.Error(w, fmt.Sprint(err), 500)
+		log.Printf(fmt.Sprint(err))
 		return
 	}
 	fmt.Fprintln(w, string(j))
