@@ -13,9 +13,9 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 	json, err := json.Marshal(PetMap)
 	if err != nil {
-		fmt.Fprintln(w, err)
+		http.Error(w, error.Error(err), 500)
 		return
 	}
 	fmt.Fprintln(w, string(json))
-	log.Println("Listed:", string(json))
+	log.Println("List requested:", string(json))
 }
