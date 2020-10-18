@@ -3,6 +3,7 @@ package food
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	pet "github.com/calanco/petcare/api/pet"
 	"github.com/gorilla/mux"
@@ -13,7 +14,8 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 
 	params := mux.Vars(r)
-	p, err := pet.GetPet(params["name"])
+	name := strings.ToLower(params["name"])
+	p, err := pet.GetPet(name)
 	if err != nil {
 		http.Error(w, error.Error(err), 404)
 		return

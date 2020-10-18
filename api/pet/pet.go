@@ -9,7 +9,7 @@ import (
 
 // Pet defines pet attributes
 type Pet struct {
-	Name    string  `json:"name"`
+	Name    Name    `json:"name"`
 	Species Species `json:"species"`
 	Breed   Breed   `json:"breed,omitempty"`
 	Size    Size    `json:"size,omitempty"`

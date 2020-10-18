@@ -15,5 +15,5 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
-	PetMap[p.Name] = p
+	PetMap[string(p.Name)] = p
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -14,9 +15,10 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 
 	params := mux.Vars(r)
-	p, ok := PetMap[params["name"]]
+	name := strings.ToLower(params["name"])
+	p, ok := PetMap[name]
 	if !ok {
-		err := fmt.Sprintf("%s doesn't exist", params["name"])
+		err := fmt.Sprintf("%s doesn't exist", name)
 		http.Error(w, err, 404)
 		log.Printf(err)
 		return
@@ -29,6 +31,6 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintln(w, string(j))
-	log.Printf("Get request for %s", params["name"])
+	log.Printf("Get request for %s", name)
 	return
 }
