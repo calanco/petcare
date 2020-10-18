@@ -2,7 +2,6 @@ package pet
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -32,10 +31,10 @@ func (p *Pet) ParseJSON(w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 	if p.Name == "" {
-		return errors.New("No name defined")
+		return fmt.Errorf("No name defined")
 	}
 	if p.Species == "" {
-		return errors.New("No species defined")
+		return fmt.Errorf("No species defined")
 	}
 	return nil
 }
