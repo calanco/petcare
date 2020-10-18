@@ -16,11 +16,11 @@ const (
 
 // UnmarshalJSON povides a json unmarshal function to force species to assume fixed values
 func (s *Species) UnmarshalJSON(data []byte) error {
-	str := strings.ToUpper(strings.Trim(string(data), `"`))
+	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {
-	case str == "DOG":
+	case str == "dog":
 		*s = DOG
-	case str == "CAT":
+	case str == "cat":
 		*s = CAT
 	default:
 		return fmt.Errorf("%s not allowed as species", str)

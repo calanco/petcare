@@ -16,11 +16,11 @@ const (
 
 // UnmarshalJSON provides a json unmarshal function to force breed to assume fixed values
 func (b *Breed) UnmarshalJSON(data []byte) error {
-	str := strings.ToUpper(strings.Trim(string(data), `"`))
+	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {
-	case str == "BASSOTTO":
+	case str == "bassotto":
 		*b = BASSOTTO
-	case str == "CHIHUAHUA":
+	case str == "chihuahua":
 		*b = CHIHUAHUA
 	default:
 		return fmt.Errorf("%s not allowed as breed", str)

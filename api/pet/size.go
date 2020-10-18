@@ -18,15 +18,15 @@ const (
 
 // UnmarshalJSON provides a json unmarshal function to force size to assume fixed values
 func (s *Size) UnmarshalJSON(data []byte) error {
-	str := strings.ToUpper(strings.Trim(string(data), `"`))
+	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {
-	case str == "SMALL":
+	case str == "small":
 		*s = SMALL
-	case str == "MEDIUM":
+	case str == "medium":
 		*s = MEDIUM
-	case str == "LARGE":
+	case str == "large":
 		*s = LARGE
-	case str == "EXTRALARGE":
+	case str == "extralarge":
 		*s = EXTRALARGE
 	default:
 		return fmt.Errorf("%s not allowed as size", str)
