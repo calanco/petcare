@@ -8,7 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// DeletHandler serves HTTP requets at /api/pet/delete endpoint
+// DeleteHandler serves DELETE HTTP requests at /api/pet/{name} endpoint
 func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 	params := mux.Vars(r)

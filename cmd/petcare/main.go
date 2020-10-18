@@ -15,8 +15,9 @@ func main() {
 
 	mux.HandleFunc("/", home.Handler).Methods("GET")
 	mux.HandleFunc("/api/pet/list", pet.ListHandler).Methods("GET")
-	mux.HandleFunc("/api/pet/create", pet.CreateHandler).Methods("POST")
-	mux.HandleFunc("/api/pet/delete/{name}", pet.DeleteHandler).Methods("DELETE")
+	mux.HandleFunc("/api/pet/{name}", pet.GetHandler).Methods("GET")
+	mux.HandleFunc("/api/pet", pet.CreateHandler).Methods("POST")
+	mux.HandleFunc("/api/pet/{name}", pet.DeleteHandler).Methods("DELETE")
 	mux.HandleFunc("/api/food/{name}", food.GetHandler).Methods("GET")
 	log.Fatal(http.ListenAndServe(":80", mux))
 }

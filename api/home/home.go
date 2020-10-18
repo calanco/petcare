@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// Handler serves HTTP requets at / endpoint
+// Handler serves HTTP requests at / endpoint
 func Handler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome in PetCare!")
 	log.Println("Home requested")

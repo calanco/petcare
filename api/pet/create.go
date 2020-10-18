@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// CreateHandler serves HTTP requets at /api/pet/create endpoint
+// CreateHandler serves POST HTTP requests at /api/pet endpoint
 func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 
