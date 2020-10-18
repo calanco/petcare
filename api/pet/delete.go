@@ -1,6 +1,7 @@
 package pet
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -9,6 +10,7 @@ import (
 
 // DeletHandler serves HTTP requets at /api/pet/delete endpoint
 func DeleteHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Content-Type", "text/plain")
 	params := mux.Vars(r)
 
 	_, ok := PetMap[params["name"]]
@@ -17,5 +19,7 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Deleted %s", params["name"])
 		return
 	}
-	log.Printf("%s doesn't exist", params["name"])
+	err := fmt.Sprintf("%s doesn't exist", params["name"])
+	http.Error(w, err, 404)
+	log.Printf(err)
 }
