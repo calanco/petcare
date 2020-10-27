@@ -4,4 +4,4 @@
 .PHONY: run
 run:
 	@echo "Starting Petcare.."
-	@go run cmd/petcare/main.go 
+	@go run cmd/petcare/main.go --port 80
