@@ -19,5 +19,5 @@ func init() {
 func main() {
 	petCareServer := server.Server()
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), &petCareServer))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), petCareServer))
 }

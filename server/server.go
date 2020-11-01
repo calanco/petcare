@@ -5,7 +5,7 @@ import (
 )
 
 // Server creates a Gorilla Mux Router for the PetCare Server
-func Server() mux.Router {
+func Server() *mux.Router {
 	mux := mux.NewRouter()
 
 	endpoints := GetEndpoints()
@@ -14,5 +14,5 @@ func Server() mux.Router {
 		mux.HandleFunc(endpoint.Path, endpoint.Function).Methods(endpoint.Method)
 	}
 
-	return *mux
+	return mux
 }
