@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// GetHandler serves HTTP requests at /api/food/ endpoint
+// GetHandler serves HTTP requests at /api/food/{name} endpoint
 func GetHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 
