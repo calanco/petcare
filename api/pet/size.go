@@ -16,7 +16,7 @@ const (
 	EXTRALARGE      = "extralarge"
 )
 
-// UnmarshalJSON provides a json unmarshal function to force size to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force Size to assume fixed values
 func (s *Size) UnmarshalJSON(data []byte) error {
 	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {

@@ -14,7 +14,7 @@ const (
 	CHIHUAHUA       = "chihuahua"
 )
 
-// UnmarshalJSON provides a json unmarshal function to force breed to assume fixed values
+// UnmarshalJSON provides a json unmarshal function to force Breed to assume fixed values
 func (b *Breed) UnmarshalJSON(data []byte) error {
 	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {

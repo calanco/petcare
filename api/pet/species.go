@@ -14,7 +14,7 @@ const (
 	CAT         = "cat"
 )
 
-// UnmarshalJSON povides a json unmarshal function to force species to assume fixed values
+// UnmarshalJSON povides a json unmarshal function to force Species to assume fixed values
 func (s *Species) UnmarshalJSON(data []byte) error {
 	str := strings.ToLower(strings.Trim(string(data), `"`))
 	switch {
