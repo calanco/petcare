@@ -10,8 +10,7 @@ Simple RESTful API server to store and retrieve information of your pets.
   Species Species `json:"species"`
   Breed   Breed   `json:"breed,omitempty"`
   Size    Size    `json:"size,omitempty"`
-  Years   *Years  `json:"years,omitempty"`
-  Months  Months  `json:"months,omitempty"`
+  Date    Date    `json:"date,omitempty"`
   Weight  Weight  `json:"weight,omitempty"`
    ```
  Every attribute of the __Pet__ struct is converted to lower case.
