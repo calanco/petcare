@@ -35,3 +35,13 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Get request for %s", name)
 	return
 }
+
+// GetPet checks if there is a pet with name equals to name and returns it
+func GetPet(name string) (Pet, error) {
+	for k, v := range PetMap {
+		if k == name {
+			return v, nil
+		}
+	}
+	return Pet{}, fmt.Errorf("%s is not one of your pets", name)
+}

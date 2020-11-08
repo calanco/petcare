@@ -32,20 +32,6 @@ func TestGetPet(t *testing.T) {
 			},
 			true,
 		},
-		{
-			Pet{
-				Name:    "",
-				Species: "Unknwown",
-			},
-			false,
-		},
-		{
-			Pet{
-				Name:    "Unknwown",
-				Species: "",
-			},
-			false,
-		},
 	}
 
 	for _, testPet := range testPets {

@@ -34,12 +34,6 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 
 // CreatePet stores the passed p pet
 func CreatePet(p Pet) error {
-	if p.Name == "" {
-		return fmt.Errorf("No name defined")
-	}
-	if p.Species == "" {
-		return fmt.Errorf("No species defined")
-	}
 	PetMap[string(p.Name)] = p
 	return nil
 }
