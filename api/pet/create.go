@@ -1,7 +1,9 @@
 package pet
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -10,15 +12,34 @@ import (
 func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, fmt.Sprint(err), 500)
+		return
+	}
+
 	p := Pet{}
-	if err := p.ParseJSON(r); err != nil {
+	if err := json.Unmarshal(body, &p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
 		log.Println(err)
 		return
 	}
+
 	if err := CreatePet(p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
 		log.Println(err)
 		return
 	}
+}
+
+// CreatePet stores the passed p pet
+func CreatePet(p Pet) error {
+	if p.Name == "" {
+		return fmt.Errorf("No name defined")
+	}
+	if p.Species == "" {
+		return fmt.Errorf("No species defined")
+	}
+	PetMap[string(p.Name)] = p
+	return nil
 }
