@@ -16,11 +16,11 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 
 	params := mux.Vars(r)
 	name := strings.ToLower(params["name"])
-	p, ok := PetMap[name]
-	if !ok {
-		err := fmt.Sprintf("%s doesn't exist", name)
-		http.Error(w, err, 404)
-		log.Printf(err)
+
+	p, err := GetPet(name)
+	if err != nil {
+		http.Error(w, fmt.Sprint(err), 404)
+		log.Printf(fmt.Sprint(err))
 		return
 	}
 
@@ -30,6 +30,7 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 		log.Printf(fmt.Sprint(err))
 		return
 	}
+
 	fmt.Fprintln(w, string(j))
 	log.Printf("Get request for %s", name)
 	return

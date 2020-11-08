@@ -21,7 +21,7 @@ type Pet struct {
 var PetMap = make(map[string]Pet)
 
 // ParseJSON marshals JSON data in Pet struct
-func (p *Pet) ParseJSON(w http.ResponseWriter, r *http.Request) error {
+func (p *Pet) ParseJSON(r *http.Request) error {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		return err
@@ -29,16 +29,10 @@ func (p *Pet) ParseJSON(w http.ResponseWriter, r *http.Request) error {
 	if err := json.Unmarshal(body, &p); err != nil {
 		return err
 	}
-	if p.Name == "" {
-		return fmt.Errorf("No name defined")
-	}
-	if p.Species == "" {
-		return fmt.Errorf("No species defined")
-	}
 	return nil
 }
 
-// GetPet checks if there is a pet with name equals to nama
+// GetPet checks if there is a pet with name equals to name and returns it
 func GetPet(name string) (Pet, error) {
 	for k, v := range PetMap {
 		if k == name {
@@ -46,4 +40,16 @@ func GetPet(name string) (Pet, error) {
 		}
 	}
 	return Pet{}, fmt.Errorf("%s is not one of your pets", name)
+}
+
+// CreatePet stores the passed p pet
+func CreatePet(p Pet) error {
+	if p.Name == "" {
+		return fmt.Errorf("No name defined")
+	}
+	if p.Species == "" {
+		return fmt.Errorf("No species defined")
+	}
+	PetMap[string(p.Name)] = p
+	return nil
 }
