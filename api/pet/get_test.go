@@ -6,12 +6,9 @@ import (
 
 // TestPet defines the struct to run test with
 type TestPet struct {
-	// testName defines the name of the test
-	testName string
-	// pet represents the pet to test
-	pet Pet
-	// ok defines if the pet has to be correctly created
-	ok bool
+	testName string // defines the name of the test
+	pet      Pet    // represents the pet to test
+	ok       bool   // defines if the pet has to be correctly created
 }
 
 // TestGetPet checks if all pets that can be created are able to be retrieved
