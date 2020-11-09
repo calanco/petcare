@@ -16,20 +16,24 @@ const (
 	EXTRALARGE      = "extralarge"
 )
 
-// UnmarshalJSON provides a json unmarshal function to force Size to assume fixed values
-func (s *Size) UnmarshalJSON(data []byte) error {
-	str := strings.ToLower(strings.Trim(string(data), `"`))
-	switch {
-	case str == "small":
-		*s = SMALL
-	case str == "medium":
-		*s = MEDIUM
-	case str == "large":
-		*s = LARGE
-	case str == "extralarge":
-		*s = EXTRALARGE
-	default:
-		return fmt.Errorf("%s not allowed as size", str)
+// validateSize checks the validity of the inserted size  and set it to lower case
+func validateSize(size *Size) error {
+	s := (strings.ToLower(string(*size)))
+	if s == "" {
+		return nil
 	}
-	return nil
+
+	*size = Size(s)
+	switch {
+	case *size == SMALL:
+		return nil
+	case *size == MEDIUM:
+		return nil
+	case *size == LARGE:
+		return nil
+	case *size == EXTRALARGE:
+		return nil
+	default:
+		return fmt.Errorf("Insert a valid size")
+	}
 }

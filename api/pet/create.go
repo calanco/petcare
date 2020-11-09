@@ -34,6 +34,30 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 
 // CreatePet stores the passed p pet
 func CreatePet(p Pet) error {
+	if err := validateName(&p.Name); err != nil {
+		return err
+	}
+
+	if err := validateSpecies(&p.Species); err != nil {
+		return err
+	}
+
+	if err := validateBreed(&p.Breed); err != nil {
+		return err
+	}
+
+	if err := validateDate(p.Date); err != nil {
+		return err
+	}
+
+	if err := validateSize(&p.Size); err != nil {
+		return err
+	}
+
+	if err := validateWeight(p.Weight); err != nil {
+		return err
+	}
+
 	PetMap[string(p.Name)] = p
 	return nil
 }

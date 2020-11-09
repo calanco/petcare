@@ -39,7 +39,7 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 // GetPet checks if there is a pet with name equals to name and returns it
 func GetPet(name string) (Pet, error) {
 	for k, v := range PetMap {
-		if k == name {
+		if k == strings.ToLower(name) {
 			return v, nil
 		}
 	}

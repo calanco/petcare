@@ -8,9 +8,12 @@ import (
 // Name is a type used by Pet struct. It's mandatory to use
 type Name string
 
-// UnmarshalJSON provides a json unmarshal function to set Name
-func (n *Name) UnmarshalJSON(data []byte) error {
-	*n = Name(strings.ToLower(strings.Trim(string(data), `"`)))
-	fmt.Println(*n)
+// validateName checks the validity of the inserted name and set it to lower case
+func validateName(name *Name) error {
+	n := strings.ToLower(string(*name))
+	if n == "" {
+		return fmt.Errorf("Insert a valid name")
+	}
+	*name = Name(n)
 	return nil
 }

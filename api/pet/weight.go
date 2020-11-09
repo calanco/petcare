@@ -2,23 +2,20 @@ package pet
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
 
 // Weight is a type used by Pet struct
 type Weight float32
 
-// UnmarshalJSON provides a json unmarshal function to set Weight
-func (w *Weight) UnmarshalJSON(data []byte) error {
-	str := strings.Trim(string(data), `"`)
-	f, err := strconv.ParseFloat(str, 32)
-	if err != nil {
-		return fmt.Errorf("%s not allowed as weight", str)
+// validateWeight checks the validity of the inserted weight
+func validateWeight(weight Weight) error {
+	w := float32(weight)
+	if w == 0 {
+		return nil
 	}
-	if f <= 0 || f > 99 {
-		return fmt.Errorf("%f not allowed as weight", f)
+
+	if w < 0 || w > 99 {
+		return fmt.Errorf("Insert a valid weight")
 	}
-	*w = Weight(f)
 	return nil
 }

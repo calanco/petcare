@@ -14,16 +14,20 @@ const (
 	CHIHUAHUA       = "chihuahua"
 )
 
-// UnmarshalJSON provides a json unmarshal function to force Breed to assume fixed values
-func (b *Breed) UnmarshalJSON(data []byte) error {
-	str := strings.ToLower(strings.Trim(string(data), `"`))
-	switch {
-	case str == "bassotto":
-		*b = BASSOTTO
-	case str == "chihuahua":
-		*b = CHIHUAHUA
-	default:
-		return fmt.Errorf("%s not allowed as breed", str)
+// validateBreed checks the validity of the inserted breed and set it to lower case
+func validateBreed(breed *Breed) error {
+	b := strings.ToLower(string(*breed))
+	if b == "" {
+		return nil
 	}
-	return nil
+
+	*breed = Breed(b)
+	switch {
+	case *breed == BASSOTTO:
+		return nil
+	case *breed == CHIHUAHUA:
+		return nil
+	default:
+		return fmt.Errorf("Insert a valid breed")
+	}
 }

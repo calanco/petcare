@@ -14,16 +14,15 @@ const (
 	CAT         = "cat"
 )
 
-// UnmarshalJSON povides a json unmarshal function to force Species to assume fixed values
-func (s *Species) UnmarshalJSON(data []byte) error {
-	str := strings.ToLower(strings.Trim(string(data), `"`))
+// validateSpecies checks the validity of the inserted species and set it to lower case
+func validateSpecies(species *Species) error {
+	*species = Species(strings.ToLower(string(*species)))
 	switch {
-	case str == "dog":
-		*s = DOG
-	case str == "cat":
-		*s = CAT
+	case *species == DOG:
+		return nil
+	case *species == CAT:
+		return nil
 	default:
-		return fmt.Errorf("%s not allowed as species", str)
+		return fmt.Errorf("Insert a valid species")
 	}
-	return nil
 }
