@@ -46,7 +46,7 @@ func CreatePet(p Pet) error {
 		return err
 	}
 
-	if err := validateDate(p.Date); err != nil {
+	if err := validateDate(&p.Date); err != nil {
 		return err
 	}
 

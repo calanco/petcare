@@ -4,33 +4,79 @@ import (
 	"testing"
 )
 
+// TestPet defines the struct to run test with
 type TestPet struct {
+	// testName defines the name of the test
+	testName string
+	// pet represents the pet to test
 	pet Pet
-	ok  bool
+	// ok defines if the pet has to be correctly created
+	ok bool
 }
 
+// TestGetPet checks if all pets that can be created are able to be retrieved
 func TestGetPet(t *testing.T) {
 	testPets := []TestPet{
 		{
+			"Working test",
 			Pet{
-				Name:    "Bruce",
+				Name:    "Bruce0",
 				Species: "Dog",
 			},
 			true,
 		},
 		{
+			"Wrong breed test",
 			Pet{
-				Name:    "Tina",
+				Name:    "Tina0",
 				Species: "Dog",
+				Breed:   "Unknown",
+			},
+			false,
+		},
+		{
+			"Working date test",
+			Pet{
+				Name:    "Tina1",
+				Species: "Dog",
+				Date:    "2006-May-30",
 			},
 			true,
 		},
 		{
+			"Wrong date test",
 			Pet{
-				Name:    "Kira",
+				Name:    "Tina2",
+				Species: "Dog",
+				Date:    "Wrong date",
+			},
+			false,
+		},
+		{
+			"Working size",
+			Pet{
+				Name:    "Kira0",
 				Species: "Cat",
+				Size:    "Medium",
 			},
 			true,
+		},
+		{
+			"Working weight",
+			Pet{
+				Name:    "Kira1",
+				Species: "Cat",
+				Weight:  2.5,
+			},
+			true,
+		},
+		{
+			"Wrong species",
+			Pet{
+				Name:    "Unknown0",
+				Species: "Unknown",
+			},
+			false,
 		},
 	}
 
@@ -39,15 +85,15 @@ func TestGetPet(t *testing.T) {
 		_, err := GetPet(string(testPet.pet.Name))
 		if err != nil {
 			if testPet.ok {
-				t.Error(testPet.pet.Name)
+				t.Errorf("%s doesn't pass", testPet.testName)
 				continue
 			}
 		} else {
 			if !testPet.ok {
-				t.Error(testPet.pet.Name)
+				t.Errorf("%s doesn't pass", testPet.testName)
 				continue
 			}
 		}
-		t.Logf("Test with %s passes", testPet.pet.Name)
+		t.Logf("Test with %s passes", testPet.testName)
 	}
 }
