@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 // CreateHandler serves POST HTTP requests at /api/pet endpoint
@@ -15,25 +16,28 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
+		logrus.Error(err)
 		return
 	}
 
 	p := Pet{}
 	if err := json.Unmarshal(body, &p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
-		log.Println(err)
+		logrus.Error(err)
 		return
 	}
 
-	if err := CreatePet(p); err != nil {
+	if err := CreatePet(&p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
-		log.Println(err)
+		logrus.WithFields(logrus.Fields{
+			"pet": p.Name,
+		}).Error(err)
 		return
 	}
 }
 
 // CreatePet stores the passed p pet
-func CreatePet(p Pet) error {
+func CreatePet(p *Pet) error {
 	if err := validateName(&p.Name); err != nil {
 		return err
 	}
@@ -58,6 +62,9 @@ func CreatePet(p Pet) error {
 		return err
 	}
 
-	PetMap[string(p.Name)] = p
+	PetMap[string(p.Name)] = *p
+	logrus.WithFields(logrus.Fields{
+		"pet": p.Name,
+	}).Info("Pet created")
 	return nil
 }

@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/calanco/petcare/server"
+	"github.com/sirupsen/logrus"
 )
 
 var port string
@@ -19,5 +19,5 @@ func init() {
 func main() {
 	petCareServer := server.Server()
 
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), petCareServer))
+	logrus.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), petCareServer))
 }

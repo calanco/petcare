@@ -3,8 +3,9 @@ package pet
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 // ListHandler serves HTTP requests at /api/pet/list endpoint
@@ -14,8 +15,9 @@ func ListHandler(w http.ResponseWriter, r *http.Request) {
 	json, err := json.Marshal(PetMap)
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
+		logrus.Error(err)
 		return
 	}
 	fmt.Fprintln(w, string(json))
-	log.Println("List requested:", string(json))
+	logrus.Info("Pets listed")
 }

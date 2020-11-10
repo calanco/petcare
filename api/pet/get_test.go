@@ -78,7 +78,7 @@ func TestGetPet(t *testing.T) {
 	}
 
 	for _, testPet := range testPets {
-		CreatePet(testPet.pet)
+		CreatePet(&testPet.pet)
 		_, err := GetPet(string(testPet.pet.Name))
 		if err != nil {
 			if testPet.ok {

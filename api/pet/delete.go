@@ -2,11 +2,11 @@ package pet
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 // DeleteHandler serves DELETE HTTP requests at /api/pet/{name} endpoint
@@ -17,10 +17,14 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	_, ok := PetMap[name]
 	if ok {
 		delete(PetMap, name)
-		log.Printf("Deleted %s", name)
+		logrus.WithFields(logrus.Fields{
+			"pet": name,
+		}).Info("Pet deleted")
 		return
 	}
-	err := fmt.Sprintf("%s doesn't exist", name)
+	err := fmt.Sprintf("Pet %s doesn't exist", name)
 	http.Error(w, err, 404)
-	log.Printf(err)
+	logrus.WithFields(logrus.Fields{
+		"pet": name,
+	}).Error(err)
 }

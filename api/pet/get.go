@@ -3,11 +3,11 @@ package pet
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 // GetHandler serves GET HTTP requests at /api/pet/{name} endpoint
@@ -20,19 +20,25 @@ func GetHandler(w http.ResponseWriter, r *http.Request) {
 	p, err := GetPet(name)
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), 404)
-		log.Printf(fmt.Sprint(err))
+		logrus.WithFields(logrus.Fields{
+			"pet": name,
+		}).Error(err)
 		return
 	}
 
 	j, err := json.Marshal(p)
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
-		log.Printf(fmt.Sprint(err))
+		logrus.WithFields(logrus.Fields{
+			"pet": name,
+		}).Error(err)
 		return
 	}
 
 	fmt.Fprintln(w, string(j))
-	log.Printf("Get request for %s", name)
+	logrus.WithFields(logrus.Fields{
+		"pet": p.Name,
+	}).Info("Pet retrieved")
 	return
 }
 
@@ -43,5 +49,5 @@ func GetPet(name string) (Pet, error) {
 			return v, nil
 		}
 	}
-	return Pet{}, fmt.Errorf("%s is not one of your pets", name)
+	return Pet{}, fmt.Errorf("Pet doesn't exist")
 }
