@@ -14,17 +14,26 @@ func DeleteHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 	params := mux.Vars(r)
 	name := strings.ToLower(params["name"])
-	_, ok := PetMap[name]
-	if ok {
-		delete(PetMap, name)
+
+	err := DeletePet(Name(name))
+	if err != nil {
+		http.Error(w, fmt.Sprint(err), 404)
 		logrus.WithFields(logrus.Fields{
 			"pet": name,
-		}).Info("Pet deleted")
+		}).Error(err)
 		return
 	}
-	err := fmt.Sprintf("Pet %s doesn't exist", name)
-	http.Error(w, err, 404)
 	logrus.WithFields(logrus.Fields{
 		"pet": name,
-	}).Error(err)
+	}).Info("Pet deleted")
+}
+
+// DeletePet deletes name from stored pets
+func DeletePet(name Name) error {
+	_, ok := PetMap[string(name)]
+	if ok {
+		delete(PetMap, string(name))
+		return nil
+	}
+	return fmt.Errorf("Pet %s doesn't exist", name)
 }
