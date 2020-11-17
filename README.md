@@ -23,7 +23,7 @@ Simple RESTful API server to store and retrieve information of your pets.
 - _/api/pet/{name}_ DELETE: delete _name_ from your stored pets
 
 ## Pets endpoints
-- _/api/pets GET: retrieve the information of all your stored pets
+- _/api/pets_ GET: retrieve the information of all your stored pets
 
 ## Food endpoints
 - _/api/food/{name}_ GET: get the suggested food to feed _name_
