@@ -38,6 +38,13 @@ func CreateHandler(w http.ResponseWriter, r *http.Request) {
 
 // CreatePet stores the passed p pet
 func CreatePet(p *Pet) error {
+	if _, err := GetPet(string(p.Name)); err == nil {
+		logrus.WithFields(logrus.Fields{
+			"pet": p.Name,
+		}).Error(err)
+		return err
+	}
+
 	if err := validateName(&p.Name); err != nil {
 		return err
 	}
