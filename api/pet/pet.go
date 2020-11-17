@@ -12,3 +12,8 @@ type Pet struct {
 
 // PetMap contains stored pets temporarily
 var PetMap = make(map[string]Pet)
+
+// CleanPets destroys all the stored pets
+func CleanPets() {
+	PetMap = make(map[string]Pet)
+}

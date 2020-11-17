@@ -8,6 +8,8 @@ import (
 
 // TestDeletePet checks if created pets can be deleted
 func TestDeletePet(t *testing.T) {
+	CleanPets()
+
 	testPet := Pet{
 		Name:    "Bruce0",
 		Species: "Dog",
