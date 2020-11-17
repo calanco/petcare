@@ -19,7 +19,7 @@ Simple RESTful API server to store and retrieve information of your pets.
 ## Pet endpoints
 - _/api/pet/{name}_ GET: retrieve the information of _name_
 - _/api/pet/_ POST: store the information of your new pet
-- _/api/pet/{name}_ PUT: add a new information for your existing pet
+- _/api/pet/{name}_ PUT: add a new information to _name_
 - _/api/pet/{name}_ DELETE: delete _name_ from your stored pets
 
 ## Pets endpoints
