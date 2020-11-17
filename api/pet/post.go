@@ -9,8 +9,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// CreateHandler serves POST HTTP requests at /api/pet endpoint
-func CreateHandler(w http.ResponseWriter, r *http.Request) {
+// PostHandler serves POST HTTP requests at /api/pet endpoint
+func PostHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "text/plain")
 
 	body, err := ioutil.ReadAll(r.Body)
