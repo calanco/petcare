@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
+	"time"
 
 	"github.com/sirupsen/logrus"
 )
@@ -75,5 +77,98 @@ func CreatePet(p *Pet) error {
 	logrus.WithFields(logrus.Fields{
 		"pet": p.Name,
 	}).Info("Pet created")
+	return nil
+}
+
+// validateName checks the validity of the inserted name and set it to lower case
+func validateName(name *Name) error {
+	n := strings.ToLower(string(*name))
+	if n == "" {
+		return fmt.Errorf("Insert a valid name")
+	}
+	*name = Name(n)
+	return nil
+}
+
+// validateSpecies checks the validity of the inserted species and set it to lower case
+func validateSpecies(species *Species) error {
+	*species = Species(strings.ToLower(string(*species)))
+	switch {
+	case *species == DOG:
+		return nil
+	case *species == CAT:
+		return nil
+	default:
+		return fmt.Errorf("Insert a valid species")
+	}
+}
+
+// validateBreed checks the validity of the inserted breed and set it to lower case
+func validateBreed(breed *Breed) error {
+	b := strings.ToLower(string(*breed))
+	if b == "" {
+		return nil
+	}
+
+	*breed = Breed(b)
+	switch {
+	case *breed == BASSOTTO:
+		return nil
+	case *breed == CHIHUAHUA:
+		return nil
+	default:
+		return fmt.Errorf("Insert a valid breed")
+	}
+}
+
+// validateDate checks the validity of the inserted date
+func validateDate(date *Date) error {
+	d := string(*date)
+	if d == "" {
+		return nil
+	}
+
+	layout := "2006-Jan-02"
+	dParsed, err := time.Parse(layout, d)
+	if err != nil {
+		return err
+	}
+
+	*date = Date(fmt.Sprintf("%d-%s-%d", dParsed.Year(), dParsed.Month(), dParsed.Day()))
+	return nil
+}
+
+// validateSize checks the validity of the inserted size  and set it to lower case
+func validateSize(size *Size) error {
+	s := (strings.ToLower(string(*size)))
+	if s == "" {
+		return nil
+	}
+
+	*size = Size(s)
+	switch {
+	case *size == SMALL:
+		return nil
+	case *size == MEDIUM:
+		return nil
+	case *size == LARGE:
+		return nil
+	case *size == EXTRALARGE:
+		return nil
+	default:
+		return fmt.Errorf("Insert a valid size")
+	}
+}
+
+// validateWeight checks the validity of the inserted weight
+func validateWeight(weight Weight) error {
+	w := float32(weight)
+	if w == 0 {
+		return nil
+	}
+
+	if w < 0 || w > 99 {
+		return fmt.Errorf("Insert a valid weight")
+	}
 	return nil
 }

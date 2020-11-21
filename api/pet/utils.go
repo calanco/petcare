@@ -59,3 +59,8 @@ func readFromFile(path string) ([]string, error) {
 	}
 	return content, nil
 }
+
+// CleanPets destroys all the stored pets
+func CleanPets() {
+	PetMap = make(map[string]Pet)
+}
