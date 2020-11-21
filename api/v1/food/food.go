@@ -1,7 +1,7 @@
 package food
 
 import (
-	"github.com/calanco/petcare/api/pet"
+	"github.com/calanco/petcare/api/v1/pet"
 )
 
 // Food is a string defining the food for a determined pet

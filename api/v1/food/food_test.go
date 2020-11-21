@@ -3,7 +3,7 @@ package food
 import (
 	"testing"
 
-	"github.com/calanco/petcare/api/pet"
+	"github.com/calanco/petcare/api/v1/pet"
 )
 
 // TestStruct contains the Pet to store and the expected wanted food

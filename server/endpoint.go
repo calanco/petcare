@@ -3,10 +3,10 @@ package server
 import (
 	"net/http"
 
-	"github.com/calanco/petcare/api/food"
-	"github.com/calanco/petcare/api/home"
-	"github.com/calanco/petcare/api/pet"
-	"github.com/calanco/petcare/api/pets"
+	"github.com/calanco/petcare/api/v1/food"
+	"github.com/calanco/petcare/api/v1/home"
+	"github.com/calanco/petcare/api/v1/pet"
+	"github.com/calanco/petcare/api/v1/pets"
 )
 
 // Endpoint defines the attributes of a PetCare endpoint

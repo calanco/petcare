@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/calanco/petcare/api/pet"
+	"github.com/calanco/petcare/api/v1/pet"
 	"github.com/sirupsen/logrus"
 )
 

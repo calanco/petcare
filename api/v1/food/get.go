@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	pet "github.com/calanco/petcare/api/pet"
+	pet "github.com/calanco/petcare/api/v1/pet"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
