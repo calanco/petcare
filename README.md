@@ -1,6 +1,6 @@
-# Petcare
+# PetCare
 
-Simple RESTful API server to store and retrieve information of your pets.
+Simple RESTful API REST API server to store and retrieve information about your pets.server to store and retrieve information of your pets.
 
 ## Usage
 
