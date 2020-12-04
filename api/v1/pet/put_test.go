@@ -4,12 +4,12 @@ import (
 	"testing"
 )
 
-// TestCreatePet checks that pet creations work properly
-func TestCreatePet(t *testing.T) {
+// TestPutPet checks that pet updates work properly
+func TestPutPet(t *testing.T) {
 	CleanPets()
 
 	for _, testPet := range TestPets {
-		err := CreatePet(&testPet.pet)
+		err := PutPet(&testPet.pet)
 		if err != nil && testPet.ok {
 			t.Errorf("%s doesn't pass", testPet.testName)
 			continue

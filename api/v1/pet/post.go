@@ -29,15 +29,6 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if existingPet, err := GetPet(string(p.Name)); err == nil {
-		msgErr := fmt.Errorf("Pet already exists")
-		http.Error(w, fmt.Sprint(msgErr), 409)
-		logrus.WithFields(logrus.Fields{
-			"pet": existingPet.Name,
-		}).Error(msgErr)
-		return
-	}
-
 	if err := CreatePet(&p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
 		logrus.WithFields(logrus.Fields{
@@ -47,8 +38,18 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// CreatePet stores the passed p pet
+// CreatePet stores the passed p pet if it doesn't already exist
 func CreatePet(p *Pet) error {
+	if _, err := GetPet(string(p.Name)); err == nil {
+		return fmt.Errorf("Pet already exists")
+	}
+
+	err := ValidateAttributes(p, "creation")
+	return err
+}
+
+// ValidateAttributes checks and converts the attributes of the passed pet
+func ValidateAttributes(p *Pet, operation string) error {
 	if err := validateName(&p.Name); err != nil {
 		return err
 	}
@@ -76,7 +77,7 @@ func CreatePet(p *Pet) error {
 	PetMap[string(p.Name)] = *p
 	logrus.WithFields(logrus.Fields{
 		"pet": p.Name,
-	}).Info("Pet created")
+	}).Info(fmt.Sprintf("Pet %s successful", operation))
 	return nil
 }
 

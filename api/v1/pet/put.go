@@ -27,11 +27,17 @@ func PutHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := CreatePet(&p); err != nil {
+	if err := PutPet(&p); err != nil {
 		http.Error(w, fmt.Sprint(err), 500)
 		logrus.WithFields(logrus.Fields{
 			"pet": p.Name,
 		}).Error(err)
 		return
 	}
+}
+
+// PutPet overrides the attributes of the existing pet or creates it from scratch
+func PutPet(pet *Pet) error {
+	err := ValidateAttributes(pet, "update")
+	return err
 }
